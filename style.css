@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#table{
+    margin: 50px;
+}
+thead{
+    background-color: white;
+}
+th{
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 22px;
+    border: 1px solid black;
+}
+td{
+    padding: 10px 20px;
+    text-align: center;
+    background-color: white;
+    color: rgb(6, 0, 125);
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid black;
+}
+#delete_button{
+    padding: 5px 10px;
+    font-size: 18px;
+    margin-left: 10px;
+    vertical-align: center;
+    border-radius: 10px;
+    border-color: rgb(156, 0, 0);
+    background-color: white;
+    color: rgb(165, 0, 0);
+    font-weight: bold;
+}
+#add_button{
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 18px;
+    vertical-align: center;
+    border-radius: 5px;
+    border-color: rgb(30, 113, 0);
+    background-color: rgb(255, 255, 255);
+    color: rgb(30, 113, 0);
+    font-weight: bold;
+}
+#form{
+    text-align: center;
+    margin: 150px auto;
+    display: none;
+}
+h3{
+    font-size: 23px;
+    margin: 5px;
+}
+input{
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+#close_button{
+    padding: 5px 10px;
+    font-size: 18px;
+    margin-left: 10px;
+    vertical-align: center;
+    border-radius: 5px;
+    border-color: rgb(156, 0, 0);
+    background-color: white;
+    color: rgb(165, 0, 0);
+    font-weight: bold;
+}
+#addButton{
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 18px;
+    vertical-align: center;
+    border-radius: 5px;
+    border-color: rgb(30, 113, 0);
+    background-color: rgb(255, 255, 255);
+    color: rgb(30, 113, 0);
+    font-weight: bold;
+}

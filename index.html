@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="index.php" name="form" id="form" method="post">
+        <h3>ID</h3>
+        <input type="number" id="id">
+        <h3>Email</h3>
+        <input type="email" id="email">
+        <h3>First name</h3>
+        <input type="text" id="first_name">
+        <h3>Last name</h3>
+        <input type="text" id="last_name">
+        <p></p>
+        <button id="addButton">add</button>
+        <button id="close_button">Close</button>
+    </form>
+ 
+
+<script>
+
+// დავალება 1
+
+
+const users = [
+{
+id: 7,
+email: "michael.lawson@reqres.in",
+first_name: "Michael",
+last_name: "Lawson",
+
+},
+{
+id: 8,
+email: "lindsay.ferguson@reqres.in",
+first_name: "Lindsay",
+last_name: "Ferguson",
+
+},
+{
+id: 9,
+email: "tobias.funke@reqres.in",
+first_name: "Tobias",
+last_name: "Funke",
+
+},
+{
+id: 10,
+email: "byron.fields@reqres.in",
+first_name: "Byron",
+last_name: "Fields",
+
+},
+{
+id: 11,
+email: "george.edwards@reqres.in",
+first_name: "George",
+last_name: "Edwards",
+
+},
+{
+id: 12,
+email: "rachel.howell@reqres.in",
+first_name: "Rachel",
+last_name: "Howell",
+
+},
+];
+
+
+const table = document.createElement("table")
+table.setAttribute("id", "table")
+document.body.appendChild(table);
+
+const tHead = document.createElement("thead")
+const th = document.createElement("th")
+th.textContent = "ID"
+tHead.appendChild(th)
+table.appendChild(tHead)
+
+const th1 = document.createElement("th")
+th1.textContent = "Email"
+tHead.appendChild(th1)
+
+const th2 = document.createElement("th")
+th2.textContent = "First name"
+tHead.appendChild(th2)
+
+const th3 = document.createElement("th")
+th3.textContent = "Last name"
+tHead.appendChild(th3)
+ 
+const tBody = document.createElement("tbody")
+table.appendChild(tBody)
+
+const addButton = document.createElement("button")
+addButton.textContent = "add +"
+addButton.setAttribute("id", "add_button")
+table.appendChild(addButton)
+
+for (let index = 0; index < users.length; index++) {
+    const element = users[index];
+
+    const tr = document.createElement("tr")
+    
+    const tdId = document.createElement("td")
+    tdId.textContent = element.id
+    tr.appendChild(tdId)
+    
+    const tdEmail = document.createElement("td")
+    tdEmail.textContent = element.email
+    tr.appendChild(tdEmail)
+
+    const tdFirstName = document.createElement("td")
+    tdFirstName.textContent = element.first_name
+    tr.appendChild(tdFirstName)
+
+    const tdLastName = document.createElement("td")
+    tdLastName.textContent = element.last_name
+    tr.appendChild(tdLastName)
+
+    const deleteButton = document.createElement("button")
+    deleteButton.textContent = "Delete"
+    deleteButton.setAttribute("id", "delete_button")
+    tr.appendChild(deleteButton)
+
+    deleteButton.addEventListener("click", () =>{
+        tr.remove()
+    })
+
+    tBody.appendChild(tr)    
+}
+
+
+const status = document.createElement("div")
+const form = document.getElementById("form")
+form.appendChild(status)
+
+form.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    const modalId = document.getElementById("id").value;
+    const modalEmail = document.getElementById("email").value;
+    const firstName = document.getElementById("first_name").value;
+    const lastName = document.getElementById("last_name").value
+    let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    try {
+        if (modalId.length === 0) {
+            document.getElementById("id").style.border = "3 px solid red"
+            throw new Error("ID field must not be empty!")
+        } else {
+            document.getElementById("id").style.border = "3px solid green"
+            status.textContent = "ID is valid!"
+            status.style.color = "green"
+            status.style.fontSize = "20px"
+            status.style.margin = "10px 20px"
+            status.style.fontWeight = "bold";
+            
+        }
+        if (!modalEmail.match(regex)) {
+            document.getElementById("email").style.border = "1 px solid red"
+            throw new Error("Email isn't correct!")
+        } else {
+            document.getElementById("email").style.borderColor = "green"
+            status.textContent = "Email is valid!"
+            status.style.color = "green"
+            status.style.fontSize = "20px"
+            status.style.margin = "10px 20px"
+            status.style.fontWeight = "bold"
+            
+        }
+        if (firstName.length < 4) {
+            document.getElementById("first_name").style.border = "3 px solid red"
+            throw new Error("First name must contain minimum 4 letter!")
+        } else {
+            document.getElementById("first_name").style.border = "3px solid green"
+            status.textContent = "First name is valid!"
+            status.style.color = "green"
+            status.style.fontSize = "20px"
+            status.style.margin = "10px 20px"
+            status.style.fontWeight = "bold"
+        }
+        if (lastName.length < 6) {
+            document.getElementById("last_name").style.border = "3px solid red"
+            throw new Error("Last name must contain minimum 6 letter!")
+        } else {
+            document.getElementById("last_name").style.border = "3px solid green"
+            status.textContent = ""
+            status.style.color = "green"
+            status.style.fontSize = "20px"
+            status.style.margin = "10px 20px"
+            status.style.fontWeight = "bold"
+        }
+        
+    } catch (e) {
+        status.textContent = e.message
+        status.style.color = "red";
+        status.style.fontSize = "20px";
+        status.style.margin = "10px 20px"  
+        status.style.fontWeight = "bold"
+    }
+    
+})
+
+addButton.addEventListener('click', () => {
+    form.style.display = "block"
+    table.style.display = "none"
+})
+
+const closeButton = document.getElementById("close_button")
+closeButton.addEventListener('click', () => {
+    form.style.display = "none"
+    table.style.display = "block"
+})
+
+const modalAddButton = document.getElementById("addButton")
+modalAddButton.addEventListener('click', () => {
+    // ????????????? ერთადერთი ვერ დავამატე ე.წ push მეთოდით input value://
+})
+
+
+
+
+
+// დავალება 2
+
+const stringFunction = (string) => {
+    return new Promise((resolve, reject) => {
+        if (string.length > 10) {
+            setTimeout(() => {
+                resolve(string)
+            }, 5000)
+        } else {
+            setTimeout(() => {
+                reject("This is async Function!")
+            }, 5000);
+        }
+    })
+
+}
+
+stringFunction("await").then((word) => {
+    console.log(word)
+}).catch ((error) => {
+    console.log(error)
+}) 
+
+stringFunction("this is not async function!").then((word) => {
+    console.log(word)
+}).catch((error) => {
+    console.log(error)
+})
+
+
+
+
+const filterNumber = (number) => {
+    return new Promise((resolve, reject) => {
+        if (number > 20) {
+            setTimeout(() => {
+                resolve (number)
+            }, 1000);
+        } else {
+            setTimeout(() => {
+                reject(`This ${number} is less then 20!`)
+            }, 500);
+        }
+    })
+}
+
+filterNumber(12).then((number) => {
+    console.log(number)
+}).catch((error) => {
+    console.log(error)
+})
+
+filterNumber(54).then((number) => {
+    console.log(number)
+}).catch((error) => {
+    console.log(error)
+})
+
+
+
+
+const studentGrade = (score) => {
+    return new Promise((resolve, reject) => {
+        if (score < 50) {
+            setTimeout(() => {
+                reject("you failed in the exam :(")
+            }, 300);
+            
+        } else {
+            setTimeout(() => {
+                resolve(`you pass the exam :) congrats!`)
+            }, 200);
+            
+        }
+    })
+}
+
+studentGrade(59).then((error) => {
+    console.log(error)
+}).catch((number) => {
+    console.log(number)
+})
+
+studentGrade(36).then((error) => {
+    console.log(error)
+}).catch((number) => {
+    console.log(number)
+})
+ 
+    </script>
+</body>
+</html>
